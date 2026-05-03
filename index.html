@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Duy Ho&#224;ng D&#7841;y To&#225;n</title>
+  <link rel="stylesheet" href="css/style.css"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-logo">
+      <i class="fas fa-graduation-cap"></i>
+      <span id="siteName"></span>
+    </div>
+    <nav class="sidebar-nav">
+      <a href="#" class="nav-item active" data-page="dashboard"><i class="fas fa-chart-pie"></i><span>Dashboard</span></a>
+      <a href="#" class="nav-item" data-page="students"><i class="fas fa-user-graduate"></i><span>H&#7885;c Vi&#234;n</span></a>
+      <a href="#" class="nav-item" data-page="classes"><i class="fas fa-chalkboard-teacher"></i><span>L&#7899;p H&#7885;c</span></a>
+      <a href="#" class="nav-item" data-page="tuition"><i class="fas fa-money-bill-wave"></i><span>H&#7885;c Ph&#237;</span></a>
+      <a href="#" class="nav-item" data-page="receipts"><i class="fas fa-receipt"></i><span>Bi&#234;n Lai</span></a>
+      <a href="#" class="nav-item" data-page="discounts"><i class="fas fa-tags"></i><span>M&#227; Gi&#7843;m Gi&#225;</span></a>
+    </nav>
+    <div class="sidebar-footer"><i class="fas fa-shield-alt"></i> Admin Panel</div>
+  </aside>
+  <div class="main-wrapper">
+    <header class="header">
+      <button class="toggle-btn" id="toggleSidebar"><i class="fas fa-bars"></i></button>
+      <div class="header-title" id="headerTitle">Dashboard</div>
+      <div class="header-right">
+        <span class="header-date" id="headerDate"></span>
+        <div class="admin-badge"><i class="fas fa-user-shield"></i> Admin</div>
+        <button onclick="sessionStorage.removeItem('auth');location.href='login.html'" style="background:none;border:1px solid #e2e8f0;border-radius:8px;padding:6px 12px;cursor:pointer;font-size:.82rem;color:#64748b;display:flex;align-items:center;gap:6px"><i class="fas fa-sign-out-alt"></i> &#272;&#259;ng xu&#7845;t</button>
+      </div>
+    </header>
+    <main class="content" id="mainContent"></main>
+    <footer class="footer">
+      <span id="footerName"></span>
+    </footer>
+  </div>
+  <div class="modal-overlay" id="modalOverlay">
+    <div class="modal" id="modal">
+      <div class="modal-header">
+        <span id="modalTitle">Modal</span>
+        <button class="modal-close" id="modalClose"><i class="fas fa-times"></i></button>
+      </div>
+      <div class="modal-body" id="modalBody"></div>
+      <div class="modal-footer">
+        <button class="btn btn-secondary" id="modalCancel">H&#7911;y</button>
+        <button class="btn btn-primary" id="modalConfirm">L&#432;u</button>
+      </div>
+    </div>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="js/data.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>

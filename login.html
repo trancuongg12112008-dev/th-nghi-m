@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>&#272;&#259;ng nh&#7853;p – Duy Ho&#224;ng D&#7841;y To&#225;n</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+  <style>
+    *{box-sizing:border-box;margin:0;padding:0}
+    body{min-height:100vh;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#1e1b4b 0%,#4f46e5 60%,#7c3aed 100%);font-family:'Segoe UI',system-ui,sans-serif}
+    .login-card{background:#fff;border-radius:20px;padding:48px 40px;width:100%;max-width:420px;box-shadow:0 24px 64px rgba(0,0,0,0.25)}
+    .login-logo{text-align:center;margin-bottom:32px}
+    .login-logo i{font-size:2.8rem;color:#4f46e5;margin-bottom:12px;display:block}
+    .login-logo h1{font-size:1.4rem;font-weight:800;color:#1e293b}
+    .login-logo p{font-size:.85rem;color:#64748b;margin-top:4px}
+    .form-group{margin-bottom:18px}
+    .form-group label{display:block;font-size:.85rem;font-weight:600;color:#64748b;margin-bottom:6px}
+    .input-wrap{position:relative}
+    .input-wrap i{position:absolute;left:14px;top:50%;transform:translateY(-50%);color:#94a3b8;font-size:.95rem}
+    .input-wrap input{width:100%;padding:11px 14px 11px 40px;border:1.5px solid #e2e8f0;border-radius:10px;font-size:.95rem;color:#1e293b;outline:none;transition:.2s}
+    .input-wrap input:focus{border-color:#4f46e5;background:#fafafe}
+    .btn-login{width:100%;padding:13px;background:linear-gradient(135deg,#4f46e5,#7c3aed);color:#fff;border:none;border-radius:10px;font-size:1rem;font-weight:700;cursor:pointer;margin-top:8px;transition:.2s;display:flex;align-items:center;justify-content:center;gap:8px}
+    .btn-login:hover{opacity:.92;transform:translateY(-1px)}
+    .error-msg{background:#fef2f2;color:#ef4444;border:1px solid #fecaca;border-radius:8px;padding:10px 14px;font-size:.85rem;margin-bottom:16px;display:none;align-items:center;gap:8px}
+    .error-msg.show{display:flex}
+    .toggle-pw{position:absolute;right:14px;top:50%;transform:translateY(-50%);cursor:pointer;color:#94a3b8;font-size:.9rem}
+  </style>
+</head>
+<body>
+  <div class="login-card">
+    <div class="login-logo">
+      <i class="fas fa-graduation-cap"></i>
+      <h1>Duy Ho&#224;ng D&#7841;y To&#225;n</h1>
+      <p>H&#7879; th&#7889;ng qu&#7843;n l&#253; h&#7885;c vi&#234;n</p>
+    </div>
+    <div class="error-msg" id="errorMsg"><i class="fas fa-exclamation-circle"></i><span id="errorText"></span></div>
+    <div class="form-group">
+      <label>T&#234;n &#273;&#259;ng nh&#7853;p</label>
+      <div class="input-wrap">
+        <i class="fas fa-user"></i>
+        <input type="text" id="username" placeholder="Nh&#7853;p t&#234;n &#273;&#259;ng nh&#7853;p" autocomplete="username"/>
+      </div>
+    </div>
+    <div class="form-group">
+      <label>M&#7853;t kh&#7849;u</label>
+      <div class="input-wrap">
+        <i class="fas fa-lock"></i>
+        <input type="password" id="password" placeholder="Nh&#7853;p m&#7853;t kh&#7849;u" autocomplete="current-password"/>
+        <span class="toggle-pw" onclick="togglePw()"><i class="fas fa-eye" id="eyeIcon"></i></span>
+      </div>
+    </div>
+    <button class="btn-login" onclick="doLogin()"><i class="fas fa-sign-in-alt"></i> &#272;&#259;ng nh&#7853;p</button>
+  </div>
+  <script>
+    // Kiểm tra nếu đã đăng nhập thì chuyển thẳng vào
+    if (sessionStorage.getItem('auth') === 'admin') location.href = 'index.html';
+
+    const ADMIN = { username: 'htqlDH', password: 'adminDHCT' };
+
+    function doLogin() {
+      const u = document.getElementById('username').value.trim();
+      const p = document.getElementById('password').value;
+      if (u === ADMIN.username && p === ADMIN.password) {
+        sessionStorage.setItem('auth', 'admin');
+        location.href = 'index.html';
+      } else {
+        const err = document.getElementById('errorMsg');
+        document.getElementById('errorText').textContent = 'Sai tên đăng nhập hoặc mật khẩu!';
+        err.classList.add('show');
+        setTimeout(() => err.classList.remove('show'), 3000);
+      }
+    }
+
+    function togglePw() {
+      const inp = document.getElementById('password');
+      const icon = document.getElementById('eyeIcon');
+      if (inp.type === 'password') { inp.type = 'text'; icon.className = 'fas fa-eye-slash'; }
+      else { inp.type = 'password'; icon.className = 'fas fa-eye'; }
+    }
+
+    document.addEventListener('keydown', e => { if (e.key === 'Enter') doLogin(); });
+  </script>
+</body>
+</html>
